@@ -1,0 +1,14 @@
+{
+  type: "trained",
+  architecture: "sd-2-1-turbo",
+  title: "SD Turbo",
+  author: "Stability AI",
+  link: "https://huggingface.co/stabilityai/sd-turbo",
+  license: "sai-nc-community",
+  files: [
+    {
+      filename: "sd_turbo.safetensors",
+      variant: "fp16",
+    },
+  ],
+}

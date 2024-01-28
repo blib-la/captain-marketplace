@@ -1,0 +1,18 @@
+{
+  type: "trained",
+  architecture: "sd-xl-turbo",
+  title: "SDXL Turbo",
+  author: "Stability AI",
+  link: "https://huggingface.co/stabilityai/sdxl-turbo",
+  license: "sai-nc-community",
+  files: [
+    {
+      filename: "sd_xl_turbo_1.0_fp16.safetensors",
+      variant: "fp16",
+    },
+    {
+      filename: "sd_xl_turbo_1.0.safetensors",
+      variant: "fp32",
+    },
+  ],
+}

@@ -1,0 +1,27 @@
+{
+  // One of trained | merged
+  type: "trained",
+  // One of sd-xl-0-9 | sd-xl-1-0 | sd-xl-turbo | sd-2-1 | sd-2-1-turbo | sd-1-5
+  architecture: "sd-xl-1-0",
+  // Title of the model (shown in UI as model title)
+  title: "SD-XL 1.0-base",
+  // Original author as in model creator
+  author: "Stability AI",
+  // Link to the hugging face repository
+  link: "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0",
+  license: "openrail++",
+  // A model can offer various versions.
+  // The first one should be a fp16 version if available.
+  // If multiple fp16 versions exist, then the first one is the preferred version.
+  // - type: can be one of fp16 | fp32 | bf16
+  files: [
+    {
+      filename: "sd_xl_base_1.0_0.9vae.safetensors",
+      variant: "fp16",
+    },
+    {
+      filename: "sd_xl_base_1.0.safetensors",
+      variant: "fp16",
+    },
+  ],
+}

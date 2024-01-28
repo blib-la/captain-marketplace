@@ -1,0 +1,18 @@
+{
+  type: "trained",
+  architecture: "sd-2-1-turbo",
+  title: "SD Turbo",
+  author: "Stability AI",
+  link: "https://huggingface.co/stabilityai/stable-diffusion-2-1",
+  license: "openrail++",
+  files: [
+    {
+      filename: "v2-1_768-ema-pruned.safetensors",
+      variant: "fp16",
+    },
+    {
+      filename: "v2-1_768-noema-pruned.safetensors",
+      variant: "fp16",
+    },
+  ],
+}
