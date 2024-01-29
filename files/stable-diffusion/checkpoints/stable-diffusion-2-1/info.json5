@@ -1,8 +1,8 @@
 {
   type: "trained",
-  architecture: "sd-2-1-turbo",
+  architecture: "sd-2-1",
   title: "SD Turbo",
-  author: "Stability AI",
+  author: "Stable Diffusion v2-1",
   link: "https://huggingface.co/stabilityai/stable-diffusion-2-1",
   license: "openrail++",
   files: [
