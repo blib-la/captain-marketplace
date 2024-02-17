@@ -29,12 +29,33 @@ jobs:
           name: index
           path: index.json
 
-  release:
-    needs: [build]
+  check-release:
+    needs: build
     runs-on: ubuntu-latest
-    if: needs.build.outputs.version != ''
+    outputs:
+      exists: ${{ steps.check_release.outputs.exists }}
     steps:
       - uses: actions/checkout@v4
+      - name: Check if release already exists
+        id: check_release
+        run: |
+          RELEASE_URL=$(curl -sH "Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ needs.build.outputs.version }})
+          if [[ "$RELEASE_URL" == *"\"url\": \"*"* ]]; then
+            echo "::set-output name=exists::true"
+          else
+            echo "::set-output name=exists::false"
+          fi
+
+  release:
+    needs: check-release
+    if: needs.check-release.outputs.exists == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: index
+          path: .
       - name: Create Release and Upload Assets
         uses: softprops/action-gh-release@v1
         with:
