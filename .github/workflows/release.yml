@@ -13,7 +13,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: "14" # Adjust this to your project's Node.js version
+          node-version: "18"
       - name: Install dependencies
         run: npm install
       - name: Run start script
@@ -45,15 +45,11 @@ jobs:
           fi
 
   release:
-    needs: check-release
-    if: needs.check-release.outputs.exists == 'false'
+    needs: [build]
     runs-on: ubuntu-latest
+    if: needs.build.outputs.version != ''
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        with:
-          name: index
-          path: .
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
