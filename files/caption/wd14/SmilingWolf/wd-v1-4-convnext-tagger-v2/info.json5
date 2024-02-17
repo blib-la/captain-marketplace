@@ -1,6 +1,6 @@
 {
   type: "trained",
-  architecture: "ONNX",
+  architecture: "wd14",
   title: "WD 1.4 ConvNext Tagger V2",
   author: "Smiling Wolf",
   link: "https://huggingface.co/SmilingWolf/wd-v1-4-convnext-tagger-v2",
@@ -8,9 +8,11 @@
   files: [
     {
       filename: "model.onnx",
+      required: true
     },
     {
       filename: "selected_tags.csv",
+      required:  true
     }
-  ],
+  ]
 }

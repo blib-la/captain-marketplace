@@ -1,0 +1,18 @@
+{
+	type: "trained",
+	architecture: "sd-1-5",
+	title: "Stable Diffusion v1-5",
+	author: "Runway",
+	link: "https://huggingface.co/runwayml/stable-diffusion-v1-5",
+	license: "creativeml-openrail-m",
+	files: [
+		{
+			filename: "v1-5-pruned.safetensors",
+			variant: "fp16",
+		},
+		{
+			filename: "v1-5-pruned-emaonly.safetensors",
+			variant: "fp16",
+		},
+	],
+}

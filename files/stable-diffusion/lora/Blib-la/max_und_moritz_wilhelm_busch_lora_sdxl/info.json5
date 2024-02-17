@@ -1,0 +1,14 @@
+{
+	type: "trained",
+	architecture: "sd-xl-1-0",
+	title: "Max und Moritz by Wilhelm Busch",
+	author: "Blibla",
+	link: "https://huggingface.co/Blib-la/max_und_moritz_wilhelm_busch_lora_sdxl",
+	license: "cc-by-nc-4.0",
+	files: [
+		{
+			filename: "max_und_moritz_wilhelm_busch_sdxl_v1.safetensors",
+			variant: "bf16",
+		},
+	],
+}

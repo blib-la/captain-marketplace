@@ -1,0 +1,14 @@
+{
+	type: "trained",
+	architecture: "sd-xl-1-0",
+	title: "Used Leather",
+	author: "Blibla",
+	link: "https://huggingface.co/Blib-la/used_leather_lora_sdxl",
+	license: "cc-by-nc-4.0",
+	files: [
+		{
+			filename: "used_leather_sdxl_v1.safetensors",
+			variant: "bf16",
+		},
+	],
+}

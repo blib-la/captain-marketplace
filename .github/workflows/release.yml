@@ -1,0 +1,75 @@
+on:
+  push:
+    branches:
+      - alpha
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.package_version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14" # Adjust this to your project's Node.js version
+      - name: Install dependencies
+        run: npm install
+      - name: Run start script
+        run: npm run start
+      - name: Get version from package.json
+        id: package_version
+        run: echo "::set-output name=version::$(jq -r '.version' package.json)"
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: index
+          path: index.json
+
+  check-release:
+    needs: build
+    runs-on: ubuntu-latest
+    outputs:
+      exists: ${{ steps.check_release.outputs.exists }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check if release already exists
+        id: check_release
+        run: |
+          RELEASE_URL=$(curl -sH "Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ needs.build.outputs.version }})
+          if [[ "$RELEASE_URL" == *"\"url\": \"*"* ]]; then
+            echo "::set-output name=exists::true"
+          else
+            echo "::set-output name=exists::false"
+          fi
+
+  release:
+    needs: check-release
+    if: needs.check-release.outputs.exists == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: index
+          path: .
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ needs.build.outputs.version }}
+          release_name: Release ${{ needs.build.outputs.version }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./index.json
+          asset_name: index.json
+          asset_content_type: application/json
