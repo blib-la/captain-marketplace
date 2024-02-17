@@ -11,7 +11,7 @@ jobs:
     outputs:
       version: ${{ steps.package_version.outputs.version }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -29,9 +29,8 @@ jobs:
   release:
     needs: [build]
     runs-on: ubuntu-latest
-    if: needs.build.outputs.version != ''
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Create Release and Upload Assets
         uses: softprops/action-gh-release@v1
         with:
