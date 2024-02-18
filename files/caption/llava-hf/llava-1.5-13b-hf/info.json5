@@ -4,6 +4,6 @@
 	title: "Llava 1.5 13b hf",
 	author: "Llava Hugging Face",
 	link: "https://huggingface.co/llava-hf/llava-1.5-13b-hf",
-	license: "apache-2.0",
+	license: "LLAMA 2 Community License",
 	git: true,
 }
